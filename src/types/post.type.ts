@@ -1,6 +1,6 @@
-import { IUser } from "@/types/user.types";
-import { IComment } from "@/types/comment.types";
-import { ICategory } from "@/types/category.types";
+import { ISubsite } from "@/types/subsite.type";
+import { IComment } from "@/types/comment.type";
+import { ICategory } from "@/types/category.type";
 
 export interface IPost {
   id: number;
@@ -10,7 +10,7 @@ export interface IPost {
   text: string;
   image: string;
   likes: number;
-  user: IUser;
-  comments: IComment[];
+  user: ISubsite;
+  comments: number;
   category: ICategory;
 }

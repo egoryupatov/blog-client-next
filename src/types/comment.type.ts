@@ -1,5 +1,5 @@
-import { IUser } from "@/types/user.types";
-import { IPost } from "@/types/post.types";
+import { ISubsite } from "@/types/subsite.type";
+import { IPost } from "@/types/post.type";
 
 export interface IComment {
   id: number;
@@ -9,5 +9,5 @@ export interface IComment {
   parent: IComment;
   children: IComment[];
   post: IPost;
-  user: IUser;
+  user: ISubsite;
 }

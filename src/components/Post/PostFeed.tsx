@@ -1,20 +1,21 @@
 import Image from "next/image";
 import Button from "@/components/Button/Button";
 import { transformDate } from "@/utils/transformDate";
-import { IPostFeed } from "@/types/postFeed";
+import { IPostFeed } from "@/types/postFeed.type";
+import Link from "next/link";
 
-interface ShortPostProps {
+interface PostFeedProps {
   post: IPostFeed;
 }
 
-export default function ShortPost(props: ShortPostProps) {
+export default function PostFeed(props: PostFeedProps) {
   return (
-    <div className="post">
+    <article className="post">
       <div className="post_header">
         <div className="post_header_left">
           <div className="post_header_avatar">
             <Image
-              src={`${props.post.category.image}`}
+              src={`${props.post.category.avatar}`}
               alt={"user avatar"}
               width={"36"}
               height={"36"}
@@ -23,11 +24,15 @@ export default function ShortPost(props: ShortPostProps) {
           </div>
           <div className="post_header_info">
             <div className="post_header_info_category">
-              {props.post.category.name}
+              <Link href={`/category/${props.post.category.id}`}>
+                {props.post.category.name}
+              </Link>
             </div>
             <div className="post_header_info_publish">
               <div className="post_header_info_publish_login">
-                {props.post.user.login}
+                <Link href={`/user/${props.post.user.id}`}>
+                  {props.post.user.login}
+                </Link>
               </div>
               <div className="post_header_info_publish_date">
                 {transformDate(props.post.publishDate)}
@@ -40,7 +45,9 @@ export default function ShortPost(props: ShortPostProps) {
         </div>
       </div>
       <div className="post_content">
-        <div className="post_content_title">{props.post.title}</div>
+        <Link href={`/post/${props.post.id}`}>
+          <div className="post_content_title">{props.post.title}</div>
+        </Link>
         <div className="post_content_description">{props.post.description}</div>
         <div className="post_content_image">
           <Image
@@ -51,12 +58,6 @@ export default function ShortPost(props: ShortPostProps) {
             className={"post_content_image_img"}
           />
         </div>
-        {/*        <div
-          className="post_content_text"
-          dangerouslySetInnerHTML={{
-            __html: `${props.post.text}`,
-          }}
-        />*/}
       </div>
       <div className="post_footer">
         <div className="post_footer_left">
@@ -98,6 +99,6 @@ export default function ShortPost(props: ShortPostProps) {
           </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 }

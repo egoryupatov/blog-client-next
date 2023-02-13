@@ -6,11 +6,13 @@ export interface IPostFeed {
   image: string;
   likes: number;
   user: {
+    id: number;
     login: string;
   };
   comments: number;
   category: {
+    id: number;
     name: string;
-    image: string;
+    avatar: string;
   };
 }

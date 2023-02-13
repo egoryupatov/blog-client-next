@@ -1,7 +1,7 @@
-export const getShortTitle = (title: string) => {
-  if (title.length > 15) {
-    return title.split("").splice(0, 65).join("") + "...";
+export const getShortLogin = (login: string) => {
+  if (login.length > 15) {
+    return login.split("").splice(0, 15).join("") + "...";
   }
 
-  return title;
+  return login;
 };
