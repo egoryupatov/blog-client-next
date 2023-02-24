@@ -1,5 +1,6 @@
 import { SERVER_URL } from "@/constants/const";
 import Post from "@/components/Post/Post";
+import Comments from "@/components/Comments/Comments";
 
 async function getPost(id: string) {
   const post = await fetch(`${SERVER_URL}/posts/${id}`);
@@ -17,6 +18,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <Post post={post} />
+      <Comments totalNumber={post.comments} />
     </>
   );
 }
