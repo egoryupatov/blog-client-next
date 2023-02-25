@@ -12,13 +12,24 @@ async function getPost(id: string) {
   return post.json();
 }
 
+async function getComments(id: string) {
+  const post = await fetch(`${SERVER_URL}/comments/posts/${id}`);
+
+  if (!post.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return post.json();
+}
+
 export default async function Page({ params }: { params: { id: string } }) {
   const post = await getPost(params.id);
+  const comments = await getComments(params.id);
 
   return (
     <>
       <Post post={post} />
-      <Comments totalNumber={post.comments} />
+      <Comments totalNumber={post.comments} comments={comments} />
     </>
   );
 }

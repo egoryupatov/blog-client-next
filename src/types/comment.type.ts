@@ -6,8 +6,6 @@ export interface IComment {
   likes: number;
   text: string;
   publishDate: Date;
-  parent: IComment;
-  children: IComment[];
-  post: IPost;
   user: ISubsite;
+  numberOfAnswers: number;
 }

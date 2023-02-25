@@ -1,13 +1,9 @@
+import { ISubsite } from "@/types/subsite.type";
+import { IPost } from "@/types/post.type";
+
 export interface ILiveComment {
   id: number;
   text: string;
-  user: {
-    id: number;
-    login: string;
-    avatar: string;
-  };
-  post: {
-    id: number;
-    title: string;
-  };
+  user: ISubsite;
+  post: IPost;
 }

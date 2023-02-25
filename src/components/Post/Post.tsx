@@ -1,8 +1,10 @@
+"use client";
 import Image from "next/image";
 import Button from "@/components/Button/Button";
 import { transformDate } from "@/utils/transformDate";
 import { IPost } from "@/types/post.type";
 import Link from "next/link";
+import Likes from "@/components/Likes/Likes";
 
 interface PostProps {
   post: IPost;
@@ -67,19 +69,11 @@ export default function Post(props: PostProps) {
       <div className="post_views">20 000 просмотров</div>
       <div className="post_footer">
         <div className="post_footer_left">
-          <div className="post_footer_left_item">
-            <div className="post_footer_left_item_like">
-              <Image
-                src={"/like.svg"}
-                alt={"likes"}
-                width={"20"}
-                height={"20"}
-              />
-            </div>
-            <div className="post_footer_left_item_count">
-              {props.post.likes}
-            </div>
-          </div>
+          <Likes
+            type={"post"}
+            likes={props.post.likes}
+            contentId={props.post.id}
+          />
           <div className="post_footer_left_item">
             <div className="post_footer_left_item_comment">
               <Image

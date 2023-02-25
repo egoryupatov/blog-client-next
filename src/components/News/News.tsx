@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { SERVER_URL } from "@/constants/const";
 import { INews } from "@/types/news.type";
+import axios from "axios";
 
 interface NewsProps {
   news: INews[];
@@ -15,11 +16,18 @@ export default function News(props: NewsProps) {
   const [offset, setOffset] = useState(4);
 
   const handleGetMoreNews = () => {
-    fetch(`${SERVER_URL}/posts/news?offset=${offset}`)
-      .then((response) => response.json())
+    axios
+      .get(`${SERVER_URL}/posts/news`, {
+        params: {
+          offset: offset,
+        },
+      })
       .then((response) => {
-        setNews([...news, ...response]);
+        setNews([...news, ...response.data]);
         setOffset((prevState) => prevState + 4);
+      })
+      .catch((error) => {
+        console.error(error); //переписать на стейт
       });
   };
 
