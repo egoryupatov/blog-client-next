@@ -3,6 +3,7 @@ import Button from "@/components/Button/Button";
 import { transformDate } from "@/utils/transformDate";
 import { IPostFeed } from "@/types/postFeed.type";
 import Link from "next/link";
+import Likes from "@/components/Likes/Likes";
 
 interface PostFeedProps {
   post: IPostFeed;
@@ -61,19 +62,11 @@ export default function PostFeed(props: PostFeedProps) {
       </div>
       <div className="post_footer">
         <div className="post_footer_left">
-          <div className="post_footer_left_item">
-            <div className="post_footer_left_item_like">
-              <Image
-                src={"/like.svg"}
-                alt={"likes"}
-                width={"20"}
-                height={"20"}
-              />
-            </div>
-            <div className="post_footer_left_item_count">
-              {props.post.likes}
-            </div>
-          </div>
+          <Likes
+            type={"post"}
+            likes={props.post.likes}
+            contentId={props.post.id}
+          />
           <div className="post_footer_left_item">
             <div className="post_footer_left_item_comment">
               <Image
