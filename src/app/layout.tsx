@@ -4,6 +4,7 @@ import { Roboto } from "@next/font/google";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import Live from "@/components/Live/Live";
 import { SERVER_URL } from "@/constants/const";
+import React from "react";
 
 const roboto = Roboto({
   weight: ["400", "500", "700"],

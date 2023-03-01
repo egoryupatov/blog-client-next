@@ -1,23 +1,40 @@
 "use client";
 import Image from "next/image";
-import Button from "@/components/Button/Button";
 import { transformDate } from "@/utils/transformDate";
 import { IPost } from "@/types/post.type";
 import Link from "next/link";
 import Likes from "@/components/Likes/Likes";
+import { useEffect, useRef, useState } from "react";
+import { io } from "socket.io-client";
 
 interface PostProps {
   post: IPost;
 }
 
 export default function Post(props: PostProps) {
+  const ioRef = useRef();
+
+  const [postViews, setPostViews] = useState(props.post.views);
+
+  useEffect(() => {
+    ioRef.current = io("http://localhost:3005");
+
+    ioRef.current.on("incrementVew", () => {
+      setPostViews((prevState) => prevState + 1);
+    });
+
+    return () => {
+      ioRef.current.disconnect();
+    };
+  }, []);
+
   return (
     <article className="post">
       <div className="post_header">
         <div className="post_header_left">
           <div className="post_header_avatar">
             <Image
-              src={`${props.post.category.avatar}`}
+              src={`${props.post.category.image}`}
               alt={"user avatar"}
               width={"36"}
               height={"36"}
@@ -43,7 +60,7 @@ export default function Post(props: PostProps) {
           </div>
         </div>
         <div className="post_header_right">
-          <Button text={"Подписаться"} style={"btn_subscribe"} />
+          <button className="btn_subscribe">Подписаться</button>
         </div>
       </div>
       <div className="post_content">
@@ -66,7 +83,7 @@ export default function Post(props: PostProps) {
           }}
         />
       </div>
-      <div className="post_views">20 000 просмотров</div>
+      <div className="post_views">{postViews} просмотров</div>
       <div className="post_footer">
         <div className="post_footer_left">
           <Likes

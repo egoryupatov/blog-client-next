@@ -1,5 +1,4 @@
 import Category from "@/components/Sidebar/Category";
-import Button from "@/components/Button/Button";
 import { ICategory } from "@/types/category.type";
 
 export default function Sidebar() {
@@ -37,7 +36,7 @@ export default function Sidebar() {
           image={category.image}
         />
       ))}
-      <Button text="Новая запись" style={"btn_sidebar"} />
+      <button className="btn_sidebar">Новая запись</button>
     </div>
   );
 }

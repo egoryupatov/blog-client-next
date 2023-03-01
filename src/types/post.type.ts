@@ -10,6 +10,7 @@ export interface IPost {
   text: string;
   image: string;
   likes: number;
+  views: number;
   user: ISubsite;
   comments: number;
   category: ICategory;

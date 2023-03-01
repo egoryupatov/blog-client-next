@@ -3,6 +3,7 @@ import News from "@/components/News/News";
 import Sort from "@/components/Sort/Sort";
 import { SERVER_URL } from "@/constants/const";
 import { IPostFeed } from "@/types/postFeed.type";
+import React from "react";
 
 async function getNews() {
   const news = await fetch(`${SERVER_URL}/posts/news?offset=0`);

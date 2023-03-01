@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Button from "@/components/Button/Button";
 import { transformDate } from "@/utils/transformDate";
 import { IPostFeed } from "@/types/postFeed.type";
 import Link from "next/link";
@@ -42,7 +41,7 @@ export default function PostFeed(props: PostFeedProps) {
           </div>
         </div>
         <div className="post_header_right">
-          <Button text={"Подписаться"} style={"btn_subscribe"} />
+          <button className="btn_subscribe">Подписаться</button>
         </div>
       </div>
       <div className="post_content">
