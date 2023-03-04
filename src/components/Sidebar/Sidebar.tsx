@@ -1,9 +1,10 @@
+"use client";
 import Category from "@/components/Sidebar/Category";
 import { ICategory } from "@/types/category.type";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { selectIsModalActive, setIsModalActive } from "@/store/blogSlice";
 
 export default function Sidebar() {
-  // список категории будем получать с бека
-
   const categories = [
     {
       id: 1,
@@ -25,6 +26,13 @@ export default function Sidebar() {
     },
   ];
 
+  const dispatch = useAppDispatch();
+  const isModalActive = useAppSelector(selectIsModalActive);
+
+  const handleSignInClick = () => {
+    dispatch(setIsModalActive(!isModalActive));
+  };
+
   return (
     <div className="sidebar">
       {categories.map((category: ICategory) => (
@@ -36,7 +44,9 @@ export default function Sidebar() {
           image={category.image}
         />
       ))}
-      <button className="btn_sidebar">Новая запись</button>
+      <button className="btn_sidebar" onClick={handleSignInClick}>
+        Новая запись
+      </button>
     </div>
   );
 }

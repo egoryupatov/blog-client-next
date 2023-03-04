@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SortOption from "@/components/Sort/SortOption";
 import { ISortOption } from "@/types/sortOption.type";
 import { getCurrentDay } from "@/utils/getCurrentDay";
@@ -36,6 +36,22 @@ export default function Sort() {
     },
   ];
 
+  const optionsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (event: any) => {
+      if (optionsRef.current && !optionsRef.current.contains(event.target)) {
+        setIsSortingPopupDisplayed((prevState) => !prevState);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isSortingPopupDisplayed]);
+
   return (
     <div className="sort">
       <div
@@ -55,7 +71,7 @@ export default function Sort() {
       </div>
 
       {isSortingPopupDisplayed ? (
-        <div className="sort_options">
+        <div className="sort_options" ref={optionsRef}>
           {sortingItems.map((item: ISortOption) => (
             <SortOption item={item} key={item.name} />
           ))}

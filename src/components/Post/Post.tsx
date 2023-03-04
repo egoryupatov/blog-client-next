@@ -5,7 +5,7 @@ import { IPost } from "@/types/post.type";
 import Link from "next/link";
 import Likes from "@/components/Likes/Likes";
 import { useEffect, useRef, useState } from "react";
-import { io } from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 
 interface PostProps {
   post: IPost;
@@ -19,7 +19,7 @@ export default function Post(props: PostProps) {
   useEffect(() => {
     ioRef.current = io("http://localhost:3005");
 
-    ioRef.current.on("incrementVew", () => {
+    ioRef.current.on("incrementView", () => {
       setPostViews((prevState) => prevState + 1);
     });
 

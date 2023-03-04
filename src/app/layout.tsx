@@ -5,6 +5,7 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import Live from "@/components/Live/Live";
 import { SERVER_URL } from "@/constants/const";
 import React from "react";
+import ReduxProvider from "@/components/ReduxProvider/ReduxProvider";
 
 const roboto = Roboto({
   weight: ["400", "500", "700"],
@@ -35,18 +36,20 @@ export default async function RootLayout({
     <html lang="en" className={roboto.className}>
       <head />
       <body>
-        <div className="app">
-          <Navbar />
-          <div className="layout">
-            <aside className="aside-left">
-              <Sidebar />
-            </aside>
-            <main className="view">{children}</main>
-            <aside className="aside-right">
-              <Live liveComments={liveComments} />
-            </aside>
+        <ReduxProvider>
+          <div className="app">
+            <Navbar />
+            <div className="layout">
+              <aside className="aside-left">
+                <Sidebar />
+              </aside>
+              <main className="view">{children}</main>
+              <aside className="aside-right">
+                <Live liveComments={liveComments} />
+              </aside>
+            </div>
           </div>
-        </div>
+        </ReduxProvider>
       </body>
     </html>
   );

@@ -1,11 +1,34 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Login from "@/components/Login/Login";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { selectIsModalActive, setIsModalActive } from "@/store/blogSlice";
 
 export default function Navbar() {
-  const [isModelActive, setIsModalActive] = useState(false);
+  const dispatch = useAppDispatch();
+  const isModalActive = useAppSelector(selectIsModalActive);
+
+  const handleSignInClick = () => {
+    dispatch(setIsModalActive(!isModalActive));
+  };
+
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (event: any) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        dispatch(setIsModalActive(!isModalActive));
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isModalActive]);
 
   return (
     <nav className="navbar">
@@ -18,14 +41,11 @@ export default function Navbar() {
         <div className="navbar_layout_middle"></div>
         <div className="navbar_layout_right">
           <Image src="/bell.svg" width={28} height={28} alt="notifications" />
-          <button
-            className="btn_login"
-            onClick={() => setIsModalActive((prevState) => !prevState)}
-          >
+          <button className="btn_login" onClick={handleSignInClick}>
             Войти
           </button>
         </div>
-        {isModelActive ? <Login /> : null}
+        {isModalActive ? <Login modalRef={modalRef} /> : null}
       </div>
     </nav>
   );

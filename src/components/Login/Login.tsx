@@ -1,10 +1,25 @@
+"use client";
 import Image from "next/image";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { selectIsModalActive } from "@/store/blogSlice";
+import { setIsModalActive } from "@/store/blogSlice";
 
-export default function Login() {
+interface LoginProps {
+  modalRef: any;
+}
+
+export default function Login(props: LoginProps) {
+  const dispatch = useAppDispatch();
+  const isModalActive = useAppSelector(selectIsModalActive);
+
+  const handleCloseModel = () => {
+    dispatch(setIsModalActive(!isModalActive));
+  };
+
   return (
     <div className="overlay">
-      <div className="login">
-        <button className="login_btn">
+      <div className="login" ref={props.modalRef}>
+        <button className="login_btn" onClick={handleCloseModel}>
           <Image
             src={"/cross.svg"}
             alt={"close the popup"}
@@ -25,7 +40,10 @@ export default function Login() {
             <div className="login_items_header_title">Вход в аккаунт</div>
           </div>
           <div className="login_items_options">
-            <button className="login_items_options_button">
+            <button
+              className="login_items_options_button"
+              onClick={handleCloseModel}
+            >
               <Image
                 src={"/google.svg"}
                 alt={"google"}

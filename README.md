@@ -1,39 +1,73 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Hi! This is one of the apps I developed as a pet project to acquire new skills and strengthen the ones I already have.
 
-## Getting Started
+## App requirements
 
-First, run the development server:
+Full-fledged blog app (front end + back end).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## App features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app features:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1) Authorization (JWT token)
+2) Routes protection (Guards)
+3) Blog post CRUD operations
+4) UserContainer rating system (rating of posts and comments published by a user affects their overall rating in the profile)
+5) Comments and nested comments
+6) SearchContainer
+7) Hidden posts (if you’re logged in, you can hide posts and unhide them in the dashboard)
+8) UserContainer dashboard
+9) Infinity scroll of posts and comments
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Used technologies
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+* Language - JavaScript/TypeScript
+* Front end framework/library - Next 13
+* Back end framework/library - Nest.js
+* State management - Redux
+* CSS - SASS
+* Database - PostgreSQL
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## How to run the app on your local machine
 
-## Learn More
+First, you'll need to create a MySQL database:
 
-To learn more about Next.js, take a look at the following resources:
+1) Install and launch MySQL on your local machine using your favorite way
+2) Create a database with the following configuration:
+    1) host: `localhost`,
+    2) username: `admin`,
+    3) port: `3306`,
+    4) password: `qwerty`,
+    5) database: `blog`,
+3) Connect to your new database using your favorite database tool (e.g. DBeaver)
+4) Create at least one record in the following tables:
+    1) Category - available blog post categories
+    2) UserContainer - existing users and blog post authors
+    3) Blog_post - existing blog posts (don't forget to select relations with a user and category)
+    4) CommentContainer - existing comments (don't forget to select relations with a user and blog post / you can also add relations between existing comments to create nested ones)
+    5) Subscribers - existing subscribers (create at least 2 users and add one of them as a relation to the other)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The second step is to start the server:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1) Clone the server repository to your local machine https://github.com/egoryupatov/blog-server-nest
+2) Navigate into the project directory
+3) Install the dependencies using one of the following commands: `npm install` or `yarn install`
+4) Start the server using one of the following commands: `npm start` or `yarn start`
 
-## Deploy on Vercel
+The final step is to start the app itself:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1) Clone the app repository to your local machine https://github.com/egoryupatov/blog-client-next
+2) Navigate into the project directory
+3) Install the dependencies using one of the following commands: `npm install` or `yarn install`
+4) Start the app using one of the following commands: `npm run dev`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# blog-next
+## Where to see the deployed version of the app
+
+You can see the deployed version of the app here - https://blogger-app-19qn.onrender.com/
+
+**Pay attention!** This is a bit outdated build and I update it quite rare, plus there is some delay in uploading blog posts.
+
+So, it's better to clone the app and launch it on your local machine.
+
+## Authorization details
+
+You can authorize into the application using the credentials of one of the users you added to your database in the very first step
