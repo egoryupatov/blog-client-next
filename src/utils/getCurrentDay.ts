@@ -1,4 +1,4 @@
-export const getCurrentDay = () => {
+export const getCurrentDay = (): string => {
   const currentDate = new Date();
 
   const monthArray = [

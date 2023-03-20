@@ -1,4 +1,4 @@
-export const transformDate = (date: Date) => {
+export const transformDate = (date: Date): string => {
   const monthArray = [
     "января",
     "февраля",

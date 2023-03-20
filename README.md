@@ -2,7 +2,7 @@ Hi! This is one of the apps I developed as a pet project to acquire new skills a
 
 ## App requirements
 
-Full-fledged blog app (front end + back end).
+Full-fledged blog app (frontend + backend).
 
 ## App features
 
@@ -31,20 +31,18 @@ The app features:
 
 First, you'll need to create a MySQL database:
 
-1) Install and launch MySQL on your local machine using your favorite way
+1) Install and launch PostgreSQL on your local machine using your favorite way
 2) Create a database with the following configuration:
     1) host: `localhost`,
-    2) username: `admin`,
-    3) port: `3306`,
-    4) password: `qwerty`,
-    5) database: `blog`,
+    2) username: `postges`,
+    3) port: `5432`,
+    5) database: `blog_pg`,
 3) Connect to your new database using your favorite database tool (e.g. DBeaver)
 4) Create at least one record in the following tables:
     1) Category - available blog post categories
-    2) UserContainer - existing users and blog post authors
+    2) Users - existing users and blog post authors
     3) Blog_post - existing blog posts (don't forget to select relations with a user and category)
-    4) CommentContainer - existing comments (don't forget to select relations with a user and blog post / you can also add relations between existing comments to create nested ones)
-    5) Subscribers - existing subscribers (create at least 2 users and add one of them as a relation to the other)
+    4) Comments - existing comments (don't forget to select relations with a user and blog post / you can also add relations between existing comments to create nested ones)
 
 The second step is to start the server:
 
